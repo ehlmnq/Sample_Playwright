@@ -1,0 +1,14 @@
+
+# Playwright
+node_modules/
+.vscode/
+.env
+.env.*
+!.env.example
+/test-results/
+/playwright-report/
+/allure-results/
+/allure-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
