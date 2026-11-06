@@ -1,6 +1,8 @@
 import {test, expect} from '@playwright/test'
 import { env } from 'node:process'
 
+const apiBaseUrl = env.API_BASE_URL || 'https://jsonplaceholder.typicode.com'
+
 test('simple browser test', async ({page})=>{
     await page.goto('/AutomationPractice/')
     const title = await page.title();
@@ -8,7 +10,6 @@ test('simple browser test', async ({page})=>{
 })
 
 test('Simple API test get call', async ({request})=>{
-    const apiBaseUrl = env.API_BASE_URL || 'https://jsonplaceholder.typicode.com'
     const response = await request.get(new URL('/posts/1', apiBaseUrl).toString())
     const responseBody = await response.json()
     expect(response.status()).toEqual(200)
@@ -20,7 +21,7 @@ test('Simple API test get call', async ({request})=>{
 })
 
 test('post request', async ({request})=>{
-    const response = await request.post('https://jsonplaceholder.typicode.com/posts', {
+    const response = await request.post(new URL('/posts', apiBaseUrl).toString(), {
         data: {
         title: 'Playwright API Test',
         body: 'This is my first POST API request',
